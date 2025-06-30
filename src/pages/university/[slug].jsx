@@ -1,7 +1,6 @@
-// src/pages/university/[slug].jsx
+// /src/pages/university/[slug].jsx
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { API_URL } from "@/utils/index"; // ✅ Import from utils
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -11,7 +10,7 @@ export default function UniversityPage() {
 
   const { data, error } = useSWR(
     slug
-      ? `${API_URL}/api/universities?filters[slug][$eq]=${slug}&populate=deep`
+      ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/universities?filters[slug][$eq]=${slug}&populate=deep`
       : null,
     fetcher
   );
